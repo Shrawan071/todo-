@@ -1,3 +1,4 @@
+(for every new project you have to do it.)
 pip install virtualenv
 virtualenv env 
 pip install flask
