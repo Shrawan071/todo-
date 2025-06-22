@@ -12,8 +12,20 @@ class Photo(db.Model):
     task = db.Column(db.String(150), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     status = db.Column(db.String(500), nullable=False)
-    date_login = db.Column(db.DateTime, default=datetime.utcnow)
+    date_time = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f"{self.task} {self.description} {self.status} {self.date_login}"
     
+@app.route("/", methods=['GET', 'POST'])
+def add_todo():
+    if request.method == 'POST':
+        task = request.form.get('task')
+        description = request.form.get('description')
+        status = "Pending"
+        if task and description:
+            new_entry = Photo(task=task, description=description,status=status)
+            db.session.add(new_entry)
+            db.session.commit()
+    showing = Photo.query.all()
+    return render_template("index.html", showing=showing)

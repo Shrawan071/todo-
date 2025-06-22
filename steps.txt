@@ -1,0 +1,5 @@
+pip install virtualenv
+virtualenv env 
+pip install flask
+pip install flask_sqlalchemy
+then you can run the python app and create db.
